@@ -1,9 +1,8 @@
-
 name: Docker Image CI
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "deploy"]
   pull_request:
     branches: [ "main" ]
 
@@ -18,7 +17,9 @@ jobs:
       run: docker build . --file Dockerfile --tag modules-ai-bot:${GITHUB_REF##*/}
 
     - name: Auth to Yandex container registry
-      run: cat key.json | docker login --username json_key --password-stdin cr.yandex
+      env: 
+        YC_SERVICE_KEY: ${{secrets.SERVICE_KEY}}
+      run: echo $YC_SERVICE_KEY > key; cat key | docker login --username json_key --password-stdin cr.yandex
 
     - name: Deploy to Yandex container registry
       env:
