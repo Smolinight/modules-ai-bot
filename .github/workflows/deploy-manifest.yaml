@@ -1,0 +1,26 @@
+
+name: Docker Image CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag modules-ai-bot:${GITHUB_REF##*/}
+
+    - name: Auth to Yandex container registry
+      run: cat key.json | docker login --username json_key --password-stdin cr.yandex
+
+    - name: Deploy to Yandex container registry
+      env:
+        REGISTRY_URL: cr.yandex/crp4i4olbh6eatrbmubk
+      run: docker tag modules-ai-bot:${GITHUB_REF##*/} ${REGISTRY_URL}/modules-ai-bot:${GITHUB_REF##*/} && docker push ${REGISTRY_URL}/modules-ai-bot:${GITHUB_REF##*/} 
