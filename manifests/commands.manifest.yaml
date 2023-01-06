@@ -1,1 +1,10 @@
 runners:
+  - fullName: "Задержка на n секунд"
+    command: "/delay"
+    type: "engine-command-flow"
+    arguments:
+      - "duration:int"      
+    script_path: "fixtures/test_scripts/04-delay.rhai"
+    functions:
+      - "delay"
+      - "get_current_dir"
