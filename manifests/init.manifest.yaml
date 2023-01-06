@@ -1,0 +1,12 @@
+# Неуказанные функции и типы к движку в базовой конфигурации не подключаются
+common_functions:
+  - "get_current_dir"
+
+# Регистрируется как команда с именем /init, но без возможности запуска из телеграма
+init:
+  - fullName: "Инициализация контекста движка"
+    type: "engine-start-flow"
+    script_path: "commands/01-init.rhai"
+    functions:
+      - "set_work_dir"
+    
