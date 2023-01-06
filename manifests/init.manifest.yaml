@@ -6,7 +6,7 @@ common_functions:
 init:
   - fullName: "Инициализация контекста движка"
     type: "engine-start-flow"
-    script_path: "fixtures/test_scripts/01-init.rhai"
+    script_path: "/commands/01-init.rhai"
     functions:
       - "set_work_dir"
     

@@ -4,7 +4,7 @@ runners:
     type: "engine-command-flow"
     arguments:
       - "duration:int"      
-    script_path: "fixtures/test_scripts/04-delay.rhai"
+    script_path: "/commands/04-delay.rhai"
     functions:
       - "delay"
       - "get_current_dir"
